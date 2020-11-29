@@ -9,6 +9,7 @@ public class Test3 {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 "applicationContext.xml");
         Person person = context.getBean("myPerson",Person.class);
+        System.out.println(person);
         person.callYourPet();
         context.close();
     }
