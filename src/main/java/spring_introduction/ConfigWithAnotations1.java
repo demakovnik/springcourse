@@ -8,8 +8,8 @@ public class ConfigWithAnotations1 {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContext3.xml");
 
-        Cat myCat = context.getBean("catBean",Cat.class);
-        myCat.say();
+        Person person = context.getBean("person",Person.class);
+        person.callYourPet();
         context.close();
     }
 
