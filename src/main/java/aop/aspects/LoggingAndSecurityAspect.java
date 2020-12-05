@@ -9,7 +9,23 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LoggingAndSecurityAspect {
 
-    @Pointcut("execution(* aop.UniLibrary.get*())")
+    @Pointcut("execution(* aop.UniLibrary.*(..))")
+    private void allMethodsFromUniLibrary(){}
+
+    @Pointcut("execution(public void aop.UniLibrary.returnMagazine())")
+    private void returnMagazineFromUniLibrary(){}
+
+    @Pointcut("allMethodsFromUniLibrary() && !returnMagazineFromUniLibrary()")
+    private void allMethodsExceptReturnMagazineFromUniLibrary(){}
+
+    @Before("allMethodsExceptReturnMagazineFromUniLibrary()")
+    public void beforeAllMethodsExceptReturnMagazineAdvice() {
+        System.out.println("beforeAllMethodsExceptReturnMagazineAdvice: write log #4");
+    }
+
+
+
+    /*@Pointcut("execution(* aop.UniLibrary.get*())")
     private void allGetMethodsFromUniLibrary(){}
 
     @Pointcut("execution(* aop.UniLibrary.return*())")
@@ -32,7 +48,7 @@ public class LoggingAndSecurityAspect {
     public void beforeGetOrReturnLoggingAdvice() {
         System.out.println("beforeGetOrReturnLoggingAdvice: write log #3");
     }
-
+*/
 
 
 
