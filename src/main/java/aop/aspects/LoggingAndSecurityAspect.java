@@ -9,7 +9,35 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LoggingAndSecurityAspect {
 
-    @Pointcut("execution(* get*())")
+    @Pointcut("execution(* aop.UniLibrary.get*())")
+    private void allGetMethodsFromUniLibrary(){}
+
+    @Pointcut("execution(* aop.UniLibrary.return*())")
+    private void allReturnMethodsFromUniLibrary(){}
+
+    @Pointcut("allGetMethodsFromUniLibrary() || allReturnMethodsFromUniLibrary()")
+    private void allGetOrReturnMethodsFromUniLibrary(){}
+
+    @Before("allGetMethodsFromUniLibrary()")
+    private void beforeGetLoggingAdvice() {
+        System.out.println("beforeGetLoggingAdvice: writing log #1");
+    }
+
+    @Before("allReturnMethodsFromUniLibrary()")
+    private void beforeReturnLoggingAdvice() {
+        System.out.println("beforeReturnLoggingAdvice: writing log #2");
+    }
+
+    @Before("allGetOrReturnMethodsFromUniLibrary()")
+    public void beforeGetOrReturnLoggingAdvice() {
+        System.out.println("beforeGetOrReturnLoggingAdvice: write log #3");
+    }
+
+
+
+
+
+    /*@Pointcut("execution(* get*())")
     private void allGetMethods(){}
 
     @Before("allGetMethods()")
@@ -21,5 +49,5 @@ public class LoggingAndSecurityAspect {
     public void beforeGetSecurityAdvice() {
 
         System.out.println("beforeGetSecurityAdvice : проверка прав на получение книги/журнала");
-    }
+    }*/
 }
