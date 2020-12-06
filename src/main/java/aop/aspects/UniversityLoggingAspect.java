@@ -1,5 +1,6 @@
 package aop.aspects;
 
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
@@ -24,10 +25,16 @@ public class UniversityLoggingAspect {
         firstStudent.setAvgGrade(avgGrade);
 
     }*/
-    @AfterThrowing(pointcut = "execution(* getStudents())",throwing = "exception")
+   /* @AfterThrowing(pointcut = "execution(* getStudents())",throwing = "exception")
     public void afterThrowingStudentsLoggingAdvice(Throwable exception) {
         System.out.println("afterThrowingStudentsLoggingAdvice: логгируем выброс исключения " + exception);
         System.out.println(exception.getMessage());
+    }*/
+
+    @After("execution(* getStudents())")
+    public void afterGetStudentsLoggingAdvice() {
+        System.out.println("afterGetStudentsLoggingAdvice: логируем нормальное" +
+                "окончание работы метода или выброс исключения");
     }
 
 
