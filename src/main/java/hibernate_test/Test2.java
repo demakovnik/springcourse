@@ -17,8 +17,10 @@ public class Test2 {
         try {
             Session session = factory.getCurrentSession();
             session.beginTransaction();
-            List<Employee> emps = session.createQuery("from Employee")
+            List<Employee> emps = session.createQuery("from Employee where " +
+                    "name = 'Nikitos'")
                     .getResultList();
+
             for(Employee e: emps) {
                 System.out.println(e);
             }
