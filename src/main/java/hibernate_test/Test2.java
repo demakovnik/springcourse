@@ -10,11 +10,11 @@ import java.util.List;
 public class Test2 {
 
     public static void main(String[] args) {
-        SessionFactory factory = new Configuration()
+
+        try(SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
-                .buildSessionFactory();
-        try {
+                .buildSessionFactory()) {
             Session session = factory.getCurrentSession();
             session.beginTransaction();
             List<Employee> emps = session.createQuery("from Employee where " +
@@ -27,8 +27,6 @@ public class Test2 {
 
             session.getTransaction().commit();
             System.out.println("Done!");
-        } finally {
-            factory.close();
         }
 
 
