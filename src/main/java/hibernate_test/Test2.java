@@ -18,7 +18,7 @@ public class Test2 {
             Session session = factory.getCurrentSession();
             session.beginTransaction();
             List<Employee> emps = session.createQuery("from Employee where " +
-                    "name = 'Nikitos'")
+                    "name = 'Nikitos' AND salary > 700")
                     .getResultList();
 
             for(Employee e: emps) {
