@@ -15,15 +15,13 @@ public class Test1 {
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
                 .addAnnotatedClass(Detail.class)
-                .buildSessionFactory();) {
-            Session session = factory.getCurrentSession();
-
-            Employee emp = new Employee("Nikitos", "Demakov", "IT", 500);
-            Detail detail = new Detail("Molchanovo","123456","demakoffnik@gmail.com");
-            emp.setEmpDetail(detail);
+                .buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
             session.beginTransaction();
-            session.save(emp);
+            Employee emp = session.get(Employee.class, 10);
+            System.out.println(emp.getEmpDetail());
             session.getTransaction().commit();
+
         }
     }
 }

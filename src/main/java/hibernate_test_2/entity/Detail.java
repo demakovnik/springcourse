@@ -21,6 +21,8 @@ public class Detail {
     @Column(name = "email")
     private String email;
 
+    public Detail() {
+    }
 
     public Detail(String city, String phoneNumber, String email) {
         this.city = city;
