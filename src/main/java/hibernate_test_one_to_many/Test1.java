@@ -18,8 +18,8 @@ public class Test1 {
                 .buildSessionFactory();
              Session session = factory.getCurrentSession()) {
             session.beginTransaction();
-            Department department = session.get(Department.class, 1);
-            System.out.println(department.getEmps());
+            Employee employee = session.get(Employee.class,1);
+            session.delete(employee);
             session.getTransaction().commit();
 
             System.out.println("Done!");

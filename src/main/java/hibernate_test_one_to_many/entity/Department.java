@@ -22,7 +22,12 @@ public class Department {
     @Column(name = "min_salary")
     private int minSalary;
 
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+    },
             mappedBy = "department")
     private List<Employee> emps;
 
