@@ -18,13 +18,10 @@ public class Test1 {
                 .buildSessionFactory();
              Session session = factory.getCurrentSession()) {
             session.beginTransaction();
-            Department department = new Department("IT",300,1200);
-            Employee employee = new Employee("Nikitos","Demakov",1000);
-            Employee employee1 = new Employee("Elena","Smirnova",1000);
-            department.addEmployeeToDepartment(employee);
-            department.addEmployeeToDepartment((employee1));
-            session.save(department);
+            Department department = session.get(Department.class, 1);
+            System.out.println(department.getEmps());
             session.getTransaction().commit();
+
             System.out.println("Done!");
         }
     }
