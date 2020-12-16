@@ -19,9 +19,9 @@ public class Test2 {
              Session session = factory.getCurrentSession()) {
             session.beginTransaction();
             Detail detail = session.get(Detail.class,4);
+            session.delete(detail);
             session.getTransaction().commit();
             System.out.println("Done!");
-            System.out.println(detail.getEmployee());
         }
     }
 }
