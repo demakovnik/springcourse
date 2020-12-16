@@ -18,6 +18,7 @@ public class Test1 {
             session.beginTransaction();
             Department department = session.get(Department.class,1);
             System.out.println(department.getEmployees());
+            session.delete(department);
 
             session.getTransaction().commit();
             System.out.println("Done!");
