@@ -19,7 +19,7 @@ public class Test1 {
              Session session = factory.getCurrentSession()) {
             session.beginTransaction();
             Employee emp = session.get(Employee.class, 2);
-            session.delete(emp);
+            session.save(emp);
             session.getTransaction().commit();
             System.out.println("Done!");
         }

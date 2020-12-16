@@ -1,4 +1,4 @@
-package hibernate_test_one_to_many.entity;
+package hibernate_test_one_to_many_uni.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,11 +10,11 @@ public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id")
     private int id;
 
     @Column(name = "name")
-    private String name;
+    private String departmentName;
 
     @Column(name = "max_salary")
     private int maxSalary;
@@ -22,30 +22,30 @@ public class Department {
     @Column(name = "min_salary")
     private int minSalary;
 
-    @OneToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH
-    },
-            mappedBy = "department")
-    private List<Employee> emps;
+    /*PERSIST,
+    MERGE,
+    REMOVE,
+    REFRESH,
+    DETACH;*/
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
+    private List<Employee> employees = new ArrayList<Employee>();
 
     public Department() {
     }
 
-    public Department(String name, int maxSalary, int minSalary) {
-        this.name = name;
+    public Department(String departmentName, int minSalary, int maxSalary) {
+        this.departmentName = departmentName;
         this.maxSalary = maxSalary;
         this.minSalary = minSalary;
     }
 
     public void addEmployeeToDepartment(Employee employee) {
-        if (emps == null) {
-            emps = new ArrayList<>();
+        if (employees == null) {
+            employees = new ArrayList<>();
         }
-        emps.add(employee);
-        employee.setDepartment(this);
+        employees.add(employee);
     }
 
     public int getId() {
@@ -56,12 +56,12 @@ public class Department {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public int getMaxSalary() {
@@ -80,19 +80,19 @@ public class Department {
         this.minSalary = minSalary;
     }
 
-    public List<Employee> getEmps() {
-        return emps;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setEmps(List<Employee> emps) {
-        this.emps = emps;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override
     public String toString() {
         return "Department{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", departmentName='" + departmentName + '\'' +
                 ", maxSalary=" + maxSalary +
                 ", minSalary=" + minSalary +
                 '}';
