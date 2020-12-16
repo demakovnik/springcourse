@@ -18,7 +18,8 @@ public class Test2 {
                 .buildSessionFactory();
              Session session = factory.getCurrentSession()) {
             session.beginTransaction();
-            Detail detail = session.get(Detail.class,4);
+            Detail detail = session.get(Detail.class,1);
+            detail.getEmployee().setEmpDetail(new Detail());
             session.delete(detail);
             session.getTransaction().commit();
             System.out.println("Done!");
