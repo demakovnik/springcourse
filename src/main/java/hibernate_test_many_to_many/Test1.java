@@ -15,13 +15,15 @@ public class Test1 {
                 .addAnnotatedClass(Section.class)
                 .buildSessionFactory();
              Session session = factory.getCurrentSession()) {
-
-
+            Section section = new Section("Dance");
+            Child child1 = new Child("Olya",12);
+            Child child2 = new Child("Petya",10);
+            Child child3 = new Child("Grisha",11);
+            section.addChildToSection(child1);
+            section.addChildToSection(child2);
+            section.addChildToSection(child3);
             session.beginTransaction();
-            Child child = session.get(Child.class,4);
-            System.out.println(child);
-            System.out.println(child.getSections());
-
+            session.persist(section);
             session.getTransaction().commit();
             System.out.println("Done!");
         }
