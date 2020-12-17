@@ -17,8 +17,8 @@ public class Test1 {
              Session session = factory.getCurrentSession()) {
             session.beginTransaction();
 
-            Section section = session.get(Section.class,5);
-            session.delete(section);
+            Child child = session.get(Child.class,1);
+            session.delete(child);
 
             session.getTransaction().commit();
             System.out.println("Done!");
